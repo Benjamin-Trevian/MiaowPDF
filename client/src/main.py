@@ -46,16 +46,14 @@ def browseFiles():
     fileToSend.set(ntpath.basename(fullPath))
 
 def sendButton(filePath):
-    global currentUrl
-    urlDisplayVar.set(pdfSend(fullPath, currentip))
+    global currentUrl   
+    urlDisplayVar.set(pdfSend(fullPath, ipVar.get()))
     currentUrl = urlDisplayVar.get()
 
 def copyUrl():
     subprocess.run("pbcopy", text=True, input=currentUrl)
 
-def ipSave():
-    global currentip
-    currentip = ipVar.get()
+
 
     
 
@@ -77,23 +75,20 @@ title.place(relx=0.5, rely=0.1, anchor="center")
 ipBox = tk.Entry(window, bg="white", fg="black", textvariable=ipVar)
 ipBox.place(relx=0.5, rely=0.2, anchor="center")
 
-submitIp = tk.Button(highlightbackground="white", fg="black", text='Soumettre ip', width=20, command=ipSave)
-submitIp.place(relx=0.5, rely=0.3, anchor="center")
-
 fileExplorer = tk.Button(highlightbackground="white", fg="black", text='Importer un fichier', width=20, command=browseFiles)
-fileExplorer.place(relx=0.5, rely=0.4, anchor="center")
+fileExplorer.place(relx=0.5, rely=0.3, anchor="center")
 
 selectedFileLabel = tk.Label(window, font=("Segoe UI",15), bg="white", fg="black", textvariable=fileToSend)
-selectedFileLabel.place(relx=0.5, rely=0.5, anchor="center")
+selectedFileLabel.place(relx=0.5, rely=0.4, anchor="center")
 
 urlDisplay = tk.Button(highlightbackground="white", fg="black", text='Envoyer', width=20, command=lambda: sendButton(fullPath))
-urlDisplay.place(relx=0.5, rely=0.6, anchor="center")
+urlDisplay.place(relx=0.5, rely=0.5, anchor="center")
 
 urlLabel = tk.Label(window, font=("Segoe UI",15), bg="white", fg="black", textvariable=urlDisplayVar)
-urlLabel.place(relx=0.5, rely=0.7, anchor="center")
+urlLabel.place(relx=0.5, rely=0.6, anchor="center")
 
 urlDisplay = tk.Button(highlightbackground="white", fg="black", text='Copier url', width=20, command=copyUrl)
-urlDisplay.place(relx=0.5, rely=0.8, anchor="center")
+urlDisplay.place(relx=0.5, rely=0.7, anchor="center")
 
 
 window.mainloop()   

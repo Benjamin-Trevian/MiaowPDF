@@ -6,7 +6,6 @@ import sys
 import time
 import urllib.request
 
-
 WEB_PORT = 8000
 SOCKET_PORT = 3031
 

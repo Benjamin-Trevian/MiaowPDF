@@ -4,14 +4,12 @@ from tkinter import *
 from tkinter import filedialog
 import ntpath
 import subprocess
+import os
 
 
 choice = 0
 fullPath = ""
 currentUrl = ""
-currentip = ""
-
-
 
 def pdfSend(filePath, ip):
     print("\n")
@@ -32,6 +30,8 @@ def pdfSend(filePath, ip):
         client.send(send)
         print("sending...")
         send = pdf.read(1024)
+    history = open("UrlHistory.txt","a")
+    history.write(f"\n{url}")
     choix = 0
     return url
 
@@ -53,9 +53,9 @@ def sendButton(filePath):
 def copyUrl():
     subprocess.run("pbcopy", text=True, input=currentUrl)
 
+def executeCommand():
+    os.system("open UrlHistory.txt")
 
-
-    
 
 fileToSend = StringVar()
 fileToSend.set("/")
@@ -90,6 +90,11 @@ urlLabel.place(relx=0.5, rely=0.6, anchor="center")
 urlDisplay = tk.Button(highlightbackground="white", fg="black", text='Copier url', width=20, command=copyUrl)
 urlDisplay.place(relx=0.5, rely=0.7, anchor="center")
 
+historyOpen = tk.Button(highlightbackground="white", fg="black", text='Ouvrir historique', width=20, command=executeCommand)
+historyOpen.place(relx=0.5, rely=0.8, anchor="center")
+
+credit = tk.Label(window, font=("Segoe UI",6), bg="white", fg="black", text="Benjamin Trévian 2023")
+credit.place(relx=0.5, rely=0.9, anchor="center")
 
 window.mainloop()   
 
